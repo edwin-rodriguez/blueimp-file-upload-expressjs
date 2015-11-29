@@ -28,6 +28,10 @@ function uploadService(opts) {
     fileUploader.get = function(req, res, callback) {
         this.config.host = req.headers.host;
         setNoCacheHeaders(res);
+        if (req.query.prefix !== undefined){
+            configs.prefix = req.query.prefix;
+            transporter.configs.prefix = req.query.prefix;
+        }
         transporter.get(callback);
     };
 
@@ -43,6 +47,11 @@ function uploadService(opts) {
         this.config.host = req.headers.host;
 
         var configs = this.config;
+
+        if (req.query.prefix !== undefined){
+            configs.prefix = req.query.prefix;
+            transporter.configs.prefix = req.query.prefix;
+        }
 
         req.body = req.body || {};
 
