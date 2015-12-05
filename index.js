@@ -126,5 +126,15 @@ function uploadService(opts) {
         transporter.delete(req, res, callback);
     };
 
+    fileUploader.move = function(req, res, callback){
+        transporter.copy(req, res, function (err, data) {
+            if (err) {
+                console.log(err, err.stack);
+                return callback(err);
+            }
+            transporter.delete(req, res, callback);
+        });
+    };
+
     return fileUploader;
 }
