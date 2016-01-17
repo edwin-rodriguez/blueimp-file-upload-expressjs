@@ -136,5 +136,15 @@ function uploadService(opts) {
         });
     };
 
+    fileUploader.copy = function(req, res, callback){
+        transporter.copy(req, res, function (err, data) {
+            if (err) {
+                console.log(err, err.stack);
+                return callback(err);
+            }
+            return callback();
+        });
+    };
+
     return fileUploader;
 }
